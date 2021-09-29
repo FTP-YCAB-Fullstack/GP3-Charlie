@@ -4,7 +4,8 @@
   "description": "Pada grup project 3 ini kami ingin membuat sebuah Backend aplikasi yang berfokus pada lingkungan sekolah yaitu pengelompokan dan pengolahan nilai siswa, tujuan dari aplikasi yang kita buat ini adalah untuk memudahkan guru dan pegawai sekolah untuk memantau dan menyimpan nilai siswa siswi dari sekolah tersebut yang bentuk akhirnya berupa sebuah raport yang berisikan nama siswa, kelas siswa, serta nilai dari siswa tersebut.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.0",
+    "nodemon": "^2.0.13",
     "sequelize": "^6.6.5"
   }
 }

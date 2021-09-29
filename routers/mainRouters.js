@@ -1,4 +1,5 @@
 const mainRouter = require('express').Router();
+const studentRouter = require ("./student");
 
 
 mainRouter.get('/', (req, res)=>{
@@ -6,5 +7,7 @@ mainRouter.get('/', (req, res)=>{
         message: 'all good, connected'
     })
 })
+
+mainRouter.use(studentRouter);
 
 module.exports = mainRouter
