@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const user = require("../models/user");
 
 let userController = {
-    getAll : async (req,res) => {
+    getAll : async (req,res,next) => {
         try {
             let data = await User.findAll()
 
@@ -12,11 +12,11 @@ let userController = {
                 users : data
             })
         } catch (error) {
-            console.log(error)
+            next({code:500,message:error.message})
         }
     },
 
-    Register : async (req,res) => {
+    Register : async (req,res,next) => {
         try {
             const {name,email,password,role} = req.body
             
