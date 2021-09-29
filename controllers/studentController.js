@@ -1,11 +1,11 @@
 "use strict"
 
-const {Student} = require("../models");
+const {Student,Class} = require("../models");
 
 const studentController = {
     getAll: async (req,res,next) =>{
         try {
-            let student = await Student.findAll();
+            let student = await Student.findAll({include:Class});
             res.status(200).json({
                 msg : "Success",
                 student
