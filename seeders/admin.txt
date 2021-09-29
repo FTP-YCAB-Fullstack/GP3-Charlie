@@ -1,0 +1,11 @@
+admin{
+    email: admin@admin.com
+    pass: admin123
+    role:1
+}
+
+role:
+    id:1,
+    name: admin
+    id:2,
+    name:teacher/user
