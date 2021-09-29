@@ -34,6 +34,51 @@ const scoreController= {
             next({code: 500, message: err.message || 'Internal Server Error'})
     
         }
+    },
+    patchScore: async(req,res,next)=>{
+        try {
+            let {studentId,MapelId,grade} = req.body;
+    
+            let data = await Score.findOne({
+                where: {
+                    id: req.params.id
+                }
+            });
+    
+            if (!data) {
+                return next({code: 400, message: 'Not Found, try another id'})
+            }
+    
+            data.studentId=studentId,
+            data.MapelId = MapelId,
+            data.grade = grade
+    
+            await data.save();
+    
+            res.status(200).json({
+                status: 'success',
+                data
+            })
+    
+            console.log(data.toJSON())
+        } catch(err) {
+            next({code: 500, message: err.message || 'Internal Server Error'})
+        }
+    },
+    deleteScore: async(req,res,next)=>{
+        try {
+            const data = await Score.findOne({where: {id: req.params.id}});
+    
+            if (!data) {
+                return next({code: 400, message: 'Not Found, please try another id'})
+            }
+    
+            await data.destroy();
+    
+            res.sendStatus(204)
+        } catch(err) {
+            next({code: 500, message: err.message || 'Internal Server Error'})
+        }
     }
 }
 
