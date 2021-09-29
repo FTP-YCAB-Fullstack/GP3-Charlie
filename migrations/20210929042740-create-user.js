@@ -6,19 +6,19 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(2)
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       role: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM("admin","teacher")
       },
       createdAt: {
         allowNull: false,
