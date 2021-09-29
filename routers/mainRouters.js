@@ -1,4 +1,5 @@
 const mainRouter = require('express').Router();
+const studentRouter = require ("./student");
 
 const userRouter = require('./user')
 
@@ -9,6 +10,7 @@ mainRouter.get('/', (req, res)=>{
     })
 })
 
+mainRouter.use(studentRouter);
 mainRouter.use(userRouter)
 
 module.exports = mainRouter
