@@ -14,7 +14,7 @@ module.exports = {
      * }], {});
     */
     let password = "admin123"
-    let hashPass = bcrypt.hashSync(password,10)
+    let hashPass = bcrypt.hashSync(password,5)
     await queryInterface.bulkInsert('Users', [{
       name:"admin",
       email:"admin@gmail.com",

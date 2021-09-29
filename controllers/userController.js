@@ -13,6 +13,14 @@ let userController = {
         } catch (error) {
             console.log(error)
         }
+    },
+
+    Register : async (req,res) => {
+        try {
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
