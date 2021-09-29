@@ -1,7 +1,6 @@
 const {User} = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const user = require("../models/user");
 
 let userController = {
     getAll : async (req,res,next) => {
@@ -18,15 +17,22 @@ let userController = {
 
     Register : async (req,res,next) => {
         try {
-            const {name,email,password,role} = req.body
-            
-            const hashed = bcrypt.hashSync(password)
+            const {name,email,password} = req.body
 
+            const isExist = await User.findOne({
+                where : {email : email}
+            })
+            
+            if(isExist){
+                next({code:500,message:"email sudah terdaftar"})
+            }
+
+            const hashed = bcrypt.hashSync(password)
             let data = {
                 name:name,
                 email:email,
                 password:hashed,
-                role:role
+                role:"teacher"
             }
             const newUser = await User.create(data)
 
@@ -35,7 +41,7 @@ let userController = {
                 teacher : newUser
             })
         } catch (error) {
-            console.log(error)
+            next({code:500,message:error.message})
         }
     }
 }
