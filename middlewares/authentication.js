@@ -14,7 +14,7 @@ const authentication = async (req,res,next) => {
 
         // cek access tokennya sama secret-keynya bener apa engga 
         const jwtPayload = jwt.verify(accesstoken,"charlie"); // disini jwt akan dapet info seperti userId dan role (dikirim saat login)
-        console.log(jwtPayload)
+        // console.log(jwtPayload)
 
         // mengecek apakah yang punya accesstoken ini ada didatabase atau engga
         let user = await User.findOne({
