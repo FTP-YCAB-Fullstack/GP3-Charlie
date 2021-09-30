@@ -1,14 +1,15 @@
-const {User} = require("../models");
+const {User,Class} = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 let userController = {
     getAll : async (req,res,next) => {
         try {
+            const currentUser = req.currentUser
             let data = await User.findAll()
-
             res.status(200).json({
-                users : data
+                users : data,
+                currentUser : currentUser // mengetahui siapa yang sedang login dari authentication
             })
         } catch (error) {
             next({code:500,message:error.message})
@@ -68,16 +69,18 @@ let userController = {
 
             //kembalikan access token
             const jwtPayload = {
-                userId : user.id
+                userId : user.id,
+                role   : user.role
             };
 
             const accesstoken = jwt.sign(jwtPayload,"charlie")
 
             res.status(200).json({
                 message : `Login Berhasil, Selamat Datang ${user.name}`,
-                accessToken : accesstoken
+                accessToken : accesstoken,
+                payload : jwtPayload
             })
-            // res.send(user)
+
         } catch (error) {
             next({code:500,message:error.message})
         }
