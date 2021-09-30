@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Mapel.hasMany(models.Score, {
-        foreignKey: 'MapelId',
-        as: 'mahasiswas'
+        foreignKey: 'MapelId'
       });
     }
   };

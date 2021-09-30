@@ -1,11 +1,11 @@
 "use strict"
 
-const {Score} = require("../models");
+const {Score,Mapel} = require("../models");
 
 const scoreController= {
     getScore: async(req,res,next)=>{
         try {
-            let score = await Score.findAll();
+            let score = await Score.findAll({include:Mapel});
             res.status(200).json({
                 message: 'Success',
                 score

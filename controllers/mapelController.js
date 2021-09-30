@@ -1,11 +1,11 @@
 "use strict"
 
-const {Mapel} = require("../models");
+const {Mapel,Score} = require("../models");
 
 const mapelController= {
     getMapel: async(req,res,next)=>{
         try {
-            let mapel = await Mapel.findAll({include});
+            let mapel = await Mapel.findAll({include:Score});
             res.status(200).json({
                 message: 'Success',
                 mapel
