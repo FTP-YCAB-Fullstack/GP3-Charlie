@@ -5,29 +5,38 @@ const {Student,Class} = require("../models");
 const studentController = {
     getAll: async (req,res,next) =>{
         try {
-            let student = await Student.findAll({include:Class});
-            res.status(200).json({
-                msg : "Success",
-                student
-            })
+            let student = await Student.findAll({include : Class});
+            if (student.length){
+                res.status(200).json({
+                    msg: "Success Get All Data of Student",
+                    student
+                })
+
+            }else{
+                res.status(404).json({
+                    msg : "Data is Empty"
+                })
+            }
         } catch (error) {
-            res.status(500).json({
-               error 
-            })
+            next({code:500,message:error.message})
         }
     },
 
     submitNewData: async(req,res,next)=>{
         try {
-            let student = await Student.create(req.body);
+            let {name,Class} = req.body;
+            let payload = {
+                name : name,
+                Class : Class
+            }
+
+            let student = await Student.create(payload);
             res.status(201).json({
                 msg : "Success Create New Student",
                 student
             })
         } catch (error) {
-            res.status(500).json({
-                error
-            })
+            next({code:500,message:error.message})
         }
     },
 
@@ -38,15 +47,18 @@ const studentController = {
                     id : req.params.id
                 }
             });
-            res.status(200).json({
-                msg : "Succes Get Data By Id",
-                student
-            })
-
+            if (student==null){
+                res.status(404).json({
+                    msg : "Data is Empty"
+                })
+            }else{
+                res.status(200).json({
+                    msg: "Success Get All Data of Student",
+                    student
+                })
+            }
         } catch (error) {
-            res.status(500).json({
-                error
-            })
+            next({code:500,message:error.message})
         }
     },
 
@@ -58,12 +70,14 @@ const studentController = {
             }
         });
             student.update(req.body);
-            res.status(201).json({
-                msg : "Success Updating Data",
-                student
-            })
+                res.status(200).json({
+                    msg: "Success Updating Data",
+                    student
+                })
+    
+            
         } catch (error) {
-            res.status(500).json(error)
+            next({code:500,message:error.message})
         }
     },
 
@@ -75,12 +89,19 @@ const studentController = {
                 }
             })
 
-            res.status(200).json({
-                msg : "Success Delete Data",
-                student
-            })
+            if(!student === 1){
+                res.status(200).json({
+                    msg : "Success Delete Data",
+                    student
+                })
+            }else{
+                res.status(404).json({
+                    msg : "Data is Empty",
+                })
+            }
+            
         } catch (error) {
-            res.status(500).json(error)
+            next({code:500,message:error.message})
         }
     }
 }

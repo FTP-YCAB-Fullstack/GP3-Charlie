@@ -11,10 +11,6 @@ app.use(express.json());
 
 app.use(route);
 
-
-
-
-
 app.use(errorHandler)
 
 app.listen(PORT, async () => {
