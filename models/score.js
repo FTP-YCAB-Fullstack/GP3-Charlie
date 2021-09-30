@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Score.belongsTo(models.Mapel, {
+        foreignKey: 'id'
+      });
     }
   };
   Score.init({

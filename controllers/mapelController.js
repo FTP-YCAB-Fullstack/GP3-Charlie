@@ -5,7 +5,7 @@ const {Mapel} = require("../models");
 const mapelController= {
     getMapel: async(req,res,next)=>{
         try {
-            let mapel = await Mapel.findAll();
+            let mapel = await Mapel.findAll({include});
             res.status(200).json({
                 message: 'Success',
                 mapel

@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const score = require('./score');
 module.exports = (sequelize, DataTypes) => {
   class Mapel extends Model {
     /**
@@ -11,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Mapel.hasMany(models.Score, {
+        foreignKey: 'MapelId',
+        as: 'mahasiswas'
+      });
     }
   };
   Mapel.init({
