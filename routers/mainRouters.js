@@ -1,6 +1,5 @@
 const mainRouter = require('express').Router();
 const studentRouter = require ("./student");
-
 const userRouter = require('./user')
 
 
