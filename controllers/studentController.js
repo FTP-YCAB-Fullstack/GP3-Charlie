@@ -18,19 +18,25 @@ const studentController = {
                 })
             }
         } catch (error) {
-            next(error)
+            next({code:500,message:error.message})
         }
     },
 
     submitNewData: async(req,res,next)=>{
         try {
-            let student = await Student.create(req.body);
+            let {name,Class} = req.body;
+            let payload = {
+                name : name,
+                Class : Class
+            }
+
+            let student = await Student.create(payload);
             res.status(201).json({
                 msg : "Success Create New Student",
                 student
             })
         } catch (error) {
-           next(error)
+            next({code:500,message:error.message})
         }
     },
 
@@ -52,9 +58,7 @@ const studentController = {
                 })
             }
         } catch (error) {
-            res.status(500).json({
-                error
-            })
+            next({code:500,message:error.message})
         }
     },
 
@@ -73,7 +77,7 @@ const studentController = {
     
             
         } catch (error) {
-            res.status(500).json(error)
+            next({code:500,message:error.message})
         }
     },
 
@@ -97,7 +101,7 @@ const studentController = {
             }
             
         } catch (error) {
-            res.status(500).json(error)
+            next({code:500,message:error.message})
         }
     }
 }
