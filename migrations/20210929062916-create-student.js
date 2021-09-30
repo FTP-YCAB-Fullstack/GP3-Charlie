@@ -12,14 +12,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull : false
       },
-<<<<<<< HEAD
-      Class: {
-        type: Sequelize.INTEGER,
-        allowNull : false,
-=======
       ClassId: {
-        type: Sequelize.INTEGER
->>>>>>> b82ed7cda5febea0a26008b892c499ac1594b7e4
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
