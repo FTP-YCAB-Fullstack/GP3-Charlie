@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Score.belongsTo(models.Mapel, {
-        foreignKey: 'id'
-      });
+      // Score.belongsTo(models.Mapel, {
+      //   foreignKey: 'id'
+      // });
     }
   };
   Score.init({
-    studentId: DataTypes.STRING,
-    MapelId: DataTypes.STRING,
+    studentId: DataTypes.INTEGER,
+    MapelId: DataTypes.INTEGER,
     grade: DataTypes.STRING
   }, {
     sequelize,

@@ -12,11 +12,18 @@ module.exports = {
      * }], {});
     */
 
-     await queryInterface.bulkInsert('Mapel', [{
-      nama_mapel: "Matematika",
-      createdAt : new Date(),
-      updatedAt : new Date()
-    }])
+     await queryInterface.bulkInsert('Mapels', [
+       {
+        nama_mapel: "Matematika",
+        createdAt : new Date(),
+        updatedAt : new Date()
+       },
+       {
+        nama_mapel: "Bahasa Indonesia",
+        createdAt : new Date(),
+        updatedAt : new Date()
+       },
+     ])
   },
 
   down: async (queryInterface, Sequelize) => {
