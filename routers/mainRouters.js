@@ -3,6 +3,7 @@ const studentRouter = require ("./student");
 
 const userRouter = require('./user')
 const scoreRouter = require('./score')
+const mapelRouter = require('./mapel')
 
 
 mainRouter.get('/', (req, res)=>{
@@ -14,5 +15,6 @@ mainRouter.get('/', (req, res)=>{
 mainRouter.use(studentRouter);
 mainRouter.use(userRouter);
 mainRouter.use(scoreRouter);
+mainRouter.use(mapelRouter);
 
 module.exports = mainRouter
