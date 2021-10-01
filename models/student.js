@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Class,{foreignKey:"ClassId"})
+      this.belongsToMany(models.Mapel,{through:"Scores"})
     }
   };
   Student.init({

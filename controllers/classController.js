@@ -3,7 +3,7 @@ const {Class,User,Student} = require("../models")
 const ClassController = {
     getAll : async (req,res,next) => {
         try {
-            let data = await Class.findAll({include:Student})
+            let data = await Class.findAll({include:[Student,User]})
             res.status(200).json({
                 message : "OK",
                 class : data
@@ -30,7 +30,7 @@ const ClassController = {
             })
 
         } catch (error) {
-            console.log(error)
+            next({code : 500,message:error.message})
         }
     }
 }

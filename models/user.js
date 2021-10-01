@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // this.belongsTo(models.Class)
+      this.belongsTo(models.Class,{foreignKey:"id",targetKey:"Teacher"})
     }
   };
   User.init({
@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING(100),
     role: DataTypes.ENUM("admin","teacher")
+    // Teacher: DataTypes.INTEGER(2)
   }, {
     sequelize,
     modelName: 'User',

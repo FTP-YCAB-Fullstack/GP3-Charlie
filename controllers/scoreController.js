@@ -1,11 +1,11 @@
 "use strict"
 
-const {Score,Mapel} = require("../models");
+const {Score,Mapel,Student} = require("../models");
 
 const scoreController= {
     getScore: async(req,res,next)=>{
         try {
-            let score = await Score.findAll({include:Mapel});
+            let score = await Score.findAll();
             res.status(200).json({
                 message: 'Success',
                 score
@@ -20,14 +20,52 @@ const scoreController= {
         try {
             let {studentId,MapelId,grade} = req.body;
     
-            let data = await Score.create({studentId, MapelId, grade});
-            // let group = await Group.findByPk(groupId)
-    
-            // await data.addGroup(group)
-    
+            let student_name = await Student.findByPk(studentId);
+            let Mapel_name = await Mapel.findByPk(MapelId)
+
+           
+            // console.log(student_name.toJSON(),Mapel_name.toJSON());
+            let result = await student_name.addMapel(Mapel_name,{through : {grade : grade}})
+            // let result = {
+            //     studentId : studentId,
+            //     MapelId : MapelId,
+            //     grade : grade
+            // }
+
+            // let score = await Score.create(result)
             res.status(201).json({
-                status: 'success',
-                data
+                status: result
+            })
+    
+        } catch (err) {
+            next({code: 500, message: err.message || 'Internal Server Error'})
+    
+        }
+    },
+    getDetail: async(req,res,next)=>{
+        try {
+            const data = await Score.findOne({
+                where: {
+                    id: req.params.id
+                },
+                include: Mapel
+            })
+    
+            let student_name = await Student.findByPk(studentId);
+            let Mapel_name = await Mapel.findByPk(MapelId)
+
+           
+            // console.log(student_name.toJSON(),Mapel_name.toJSON());
+            let result = await student_name.addMapel(Mapel_name)
+            // let result = {
+            //     studentId : studentId,
+            //     MapelId : MapelId,
+            //     grade : grade
+            // }
+
+            // let score = await Score.create(result)
+            res.status(201).json({
+                status: result
             })
     
         } catch (err) {

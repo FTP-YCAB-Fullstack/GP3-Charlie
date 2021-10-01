@@ -1,11 +1,12 @@
 "use strict"
 
-const {Student,Class} = require("../models");
+const {Student,Class,Mapel} = require("../models");
+
 
 const studentController = {
     getAll: async (req,res,next) =>{
         try {
-            let student = await Student.findAll({include : Class});
+            let student = await Student.findAll({include : [Class,Mapel]});
             if (student.length){
                 res.status(200).json({
                     msg: "Success Get All Data of Student",
@@ -24,10 +25,10 @@ const studentController = {
 
     submitNewData: async(req,res,next)=>{
         try {
-            let {name,Class} = req.body;
+            let {name,ClassId} = req.body;
             let payload = {
                 name : name,
-                Class : Class
+                ClassId : ClassId
             }
 
             let student = await Student.create(payload);
