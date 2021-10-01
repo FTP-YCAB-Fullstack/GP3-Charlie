@@ -119,6 +119,11 @@ const studentController = {
             Student.update(payload,{where : {
                 id : id
             }})
+
+            res.status(200).json({
+                status:"Student Updated",
+                detail : payload
+            })
             
         } catch (error) {
             next({code:500,message:error.message})
