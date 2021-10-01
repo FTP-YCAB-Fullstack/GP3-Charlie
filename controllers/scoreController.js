@@ -24,8 +24,8 @@ const scoreController= {
             let Mapel_name = await Mapel.findByPk(MapelId)
 
            
-            console.log(student_name.toJSON(),Mapel_name.toJSON());
-            let result = await student_name.addMapel(Mapel_name)
+            // console.log(student_name.toJSON(),Mapel_name.toJSON());
+            let result = await student_name.addMapel(Mapel_name,{through : {grade : grade}})
             // let result = {
             //     studentId : studentId,
             //     MapelId : MapelId,

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const {User} = require("../models");
+const {User,Class} = require("../models");
 
 const authentication = async (req,res,next) => {
     try {
@@ -9,7 +9,7 @@ const authentication = async (req,res,next) => {
 
         // cek access tokennya ada apa engga
         if(!accesstoken){
-            throw new error ("accesstoken needed")
+            throw new Error ("accesstoken needed")
         }
 
         // cek access tokennya sama secret-keynya bener apa engga 
@@ -20,7 +20,18 @@ const authentication = async (req,res,next) => {
         let user = await User.findOne({
             where : {
                 id : jwtPayload.userId  // cek apakah idnya sama kayak yang dibawa payload
-            }
+            },
+            attributes : {
+                exclude:["createdAt","updatedAt","password"]
+            },
+            include : [
+                {
+                    model : Class,
+                    attributes : {
+                        exclude : ["createdAt","updatedAt"]
+                    }
+                }
+            ]
         })
 
         // kalo user udah engga ada di database bakal error

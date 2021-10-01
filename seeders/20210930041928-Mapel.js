@@ -27,7 +27,17 @@ module.exports = {
          nama_mapel: "Ilmu Pengetahuan Alam",
          createdAt : new Date(),
          updatedAt : new Date()
-       }
+       },
+       {
+        nama_mapel: "Ilmu Pengetahuan Sosial",
+        createdAt : new Date(),
+        updatedAt : new Date()
+      },
+      {
+        nama_mapel: "Bahasa Inggris",
+        createdAt : new Date(),
+        updatedAt : new Date()
+      }
      ])
   },
 

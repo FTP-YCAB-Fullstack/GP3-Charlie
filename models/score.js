@@ -11,16 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Score.belongsTo(models.Mapel, {
-        foreignKey: 'id'
-      })
+      // Score.belongsTo(models.Mapel, {
+      //   foreignKey: 'id'
+      // })
       // this.belongsToMany(models.Student,{through:"studentId"})
+      // this.belongsToMany(models.Student,{through : "Scores",sourceKey : "studentId"})
+      // this.belongsToMany(models.Mapel,{through : "Scores",sourceKey: "MapelId"})
     }
   };
   Score.init({
     studentId: DataTypes.INTEGER,
     MapelId: DataTypes.INTEGER,
-    grade: DataTypes.STRING
+    grade: DataTypes.STRING(2)
   }, {
     sequelize,
     modelName: 'Score',

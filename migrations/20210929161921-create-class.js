@@ -12,7 +12,11 @@ module.exports = {
         type: Sequelize.STRING(100)
       },
       Teacher: {
-        type: Sequelize.INTEGER(2)
+        type: Sequelize.INTEGER(2),
+        references : {
+          model : "Users",
+          key : "id"
+        }
       },
       createdAt: {
         allowNull: false,

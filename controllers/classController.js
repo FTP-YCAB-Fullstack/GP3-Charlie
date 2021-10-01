@@ -30,7 +30,7 @@ const ClassController = {
             })
 
         } catch (error) {
-            console.log(error)
+            next({code : 500,message:error.message})
         }
     }
 }

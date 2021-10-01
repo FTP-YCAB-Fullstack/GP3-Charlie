@@ -18,22 +18,18 @@ let userController = {
 
     Register : async (req,res,next) => {
         try {
-            const {name,email,password,Teacher} = req.body
+            const {name,email,password} = req.body
+
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+                return next({code:406,message:"format email is not correct"})
+            }
 
             const isExist = await User.findOne({
                 where : {email : email}
             })
             
             if(isExist){
-                throw new Error("Email already exist")
-            }
-
-            const moreOne = await User.findOne({
-                where:{Teacher : Teacher}
-            })
-
-            if(moreOne){
-                throw new Error("Teacher Class already exist")
+                return next({code:409,message:"email already exist"})
             }
 
             const hashed = bcrypt.hashSync(password)
@@ -42,13 +38,12 @@ let userController = {
                 email:email,
                 password:hashed,
                 role:"teacher",
-                Teacher:Teacher
             }
             const newUser = await User.create(data)
 
             res.status(201).json({
                 message : "user created",
-                // teacher : newUser
+                teacher : {Nama_Guru : newUser.name,ID:newUser.id,email:email,Role:"teacher"}
             })
         } catch (error) {
             next({code:500,message:error.message})
