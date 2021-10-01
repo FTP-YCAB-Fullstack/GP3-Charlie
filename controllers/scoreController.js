@@ -16,6 +16,32 @@ const scoreController= {
             })
         }
     },
+    addScore: async(req,res,next)=>{
+        try {
+            let {studentId,MapelId,grade} = req.body;
+    
+            let student_name = await Student.findByPk(studentId);
+            let Mapel_name = await Mapel.findByPk(MapelId)
+
+           
+            console.log(student_name.toJSON(),Mapel_name.toJSON());
+            let result = await student_name.addMapel(Mapel_name)
+            // let result = {
+            //     studentId : studentId,
+            //     MapelId : MapelId,
+            //     grade : grade
+            // }
+
+            // let score = await Score.create(result)
+            res.status(201).json({
+                status: result
+            })
+    
+        } catch (err) {
+            next({code: 500, message: err.message || 'Internal Server Error'})
+    
+        }
+    },
     getDetail: async(req,res,next)=>{
         try {
             const data = await Score.findOne({

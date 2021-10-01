@@ -6,10 +6,10 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(4)
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       Teacher: {
         type: Sequelize.INTEGER(2)

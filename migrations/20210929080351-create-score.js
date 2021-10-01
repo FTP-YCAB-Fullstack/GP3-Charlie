@@ -6,16 +6,16 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(4)
       },
       studentId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(4)
       },
       MapelId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(4)
       },
       grade: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(2)
       },
       createdAt: {
         allowNull: false,

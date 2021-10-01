@@ -20,6 +20,9 @@ module.exports = {
       role: {
         type: Sequelize.ENUM("admin","teacher")
       },
+      Teacher: {
+        type: Sequelize.INTEGER(2)
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
