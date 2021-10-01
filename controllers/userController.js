@@ -6,11 +6,40 @@ let userController = {
     getAll : async (req,res,next) => {
         try {
             const currentUser = req.currentUser
-            let data = await User.findAll({include:Class})
-            res.status(200).json({
-                users : data,
-                currentUser : currentUser // mengetahui siapa yang sedang login dari authentication
-            })
+            if(currentUser.role === "admin"){
+                let data = await User.findAll({include:Class})
+                res.status(200).json({
+                    users : data,
+                    currentUser : currentUser // mengetahui siapa yang sedang login dari authentication
+                })
+            }
+
+            if (currentUser.role === "teacher"){
+                try {
+                    let data = await User.findOne({
+                        where : {
+                            id : currentUser.Class.dataValues.Teacher
+                        },
+                        include : Class
+                    })
+                    res.status(200).json({
+                        users : data,
+                        currentUser : currentUser // mengetahui siapa yang sedang login dari authentication
+                    })
+                } catch (error) {
+                    next({code : 404,message:"Guru tidak terdaftar di kelas manapun"})
+                }
+                // if(currentUser.Class.dataValues.Teacher === "null"){
+                //     return next({code : 404,message:"Guru tidak terdaftar dimanapun"})
+                // }
+                // console.log(currentUser.Class.dataValues.Teacher)
+                
+            }
+
+            console.log(currentUser)
+            
+            console.log(currentUser.role)
+            
         } catch (error) {
             next({code:500,message:error.message||'internal server error'})
         }
