@@ -9,7 +9,7 @@ const authentication = async (req,res,next) => {
 
         // cek access tokennya ada apa engga
         if(!accesstoken){
-            throw new error ("accesstoken needed")
+            throw new Error ("accesstoken needed")
         }
 
         // cek access tokennya sama secret-keynya bener apa engga 
