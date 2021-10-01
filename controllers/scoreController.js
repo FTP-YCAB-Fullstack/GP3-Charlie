@@ -16,9 +16,14 @@ const scoreController= {
             })
         }
     },
-    addScore: async(req,res,next)=>{
+    getDetail: async(req,res,next)=>{
         try {
-            let {studentId,MapelId,grade} = req.body;
+            const data = await Score.findOne({
+                where: {
+                    id: req.params.id
+                },
+                include: Mapel
+            })
     
             let student_name = await Student.findByPk(studentId);
             let Mapel_name = await Mapel.findByPk(MapelId)

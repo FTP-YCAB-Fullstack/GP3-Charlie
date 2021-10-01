@@ -12,7 +12,7 @@ let userController = {
                 currentUser : currentUser // mengetahui siapa yang sedang login dari authentication
             })
         } catch (error) {
-            next({code:500,message:error.message})
+            next({code:500,message:error.message||'internal server error'})
         }
     },
 
