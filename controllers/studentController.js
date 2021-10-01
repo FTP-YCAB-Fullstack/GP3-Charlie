@@ -6,11 +6,13 @@ const {Student,Class,Mapel} = require("../models");
 const studentController = {
     getAll: async (req,res,next) =>{
         try {
+            const currentUser = req.currentUser;
             let student = await Student.findAll({include : [Class,Mapel]});
             if (student.length){
                 res.status(200).json({
                     msg: "Success Get All Data of Student",
-                    student
+                    student,
+                    currentUser
                 })
 
             }else{
