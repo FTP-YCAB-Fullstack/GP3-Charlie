@@ -110,17 +110,15 @@ const studentController = {
 
     update : async(req,res,next)=>{
         try {
-            let student = await Student.findOne({
-            where : {
-                id : req.params.id    
+            const {id} = req.params;
+            const {name, ClassId} = req.body;
+            const payload = {
+                name : name,
+                ClassId : ClassId
             }
-        });
-            student.update(req.body);
-                res.status(200).json({
-                    msg: "Success Updating Data",
-                    student
-                })
-    
+            Student.update(payload,{where : {
+                id : id
+            }})
             
         } catch (error) {
             next({code:500,message:error.message})
@@ -129,16 +127,16 @@ const studentController = {
 
     revoke : async(req,res,next)=>{
         try {
+            const {id} = req.params;
             let student = await Student.destroy({
                 where : {
-                    id : req.params.id
+                    id : id
                 }
             })
 
-            if(!student === 1){
+            if(student){
                 res.status(200).json({
-                    msg : "Success Delete Data",
-                    student
+                    msg : "Success Delete Data"
                 })
             }else{
                 res.status(404).json({
