@@ -6,19 +6,19 @@ let userController = {
     getAll : async (req,res,next) => {
         try {
             const currentUser = req.currentUser
-            let data = await User.findAll()
+            let data = await User.findAll({include:Class})
             res.status(200).json({
                 users : data,
                 currentUser : currentUser // mengetahui siapa yang sedang login dari authentication
             })
         } catch (error) {
-            next({code:500,message:error.message})
+            next({code:500,message:error.message||'internal server error'})
         }
     },
 
     Register : async (req,res,next) => {
         try {
-            const {name,email,password} = req.body
+            const {name,email,password,Teacher} = req.body
 
             const isExist = await User.findOne({
                 where : {email : email}
@@ -28,18 +28,27 @@ let userController = {
                 throw new Error("Email already exist")
             }
 
+            const moreOne = await User.findOne({
+                where:{Teacher : Teacher}
+            })
+
+            if(moreOne){
+                throw new Error("Teacher Class already exist")
+            }
+
             const hashed = bcrypt.hashSync(password)
             let data = {
                 name:name,
                 email:email,
                 password:hashed,
-                role:"teacher"
+                role:"teacher",
+                Teacher:Teacher
             }
             const newUser = await User.create(data)
 
             res.status(201).json({
                 message : "user created",
-                teacher : newUser
+                // teacher : newUser
             })
         } catch (error) {
             next({code:500,message:error.message})

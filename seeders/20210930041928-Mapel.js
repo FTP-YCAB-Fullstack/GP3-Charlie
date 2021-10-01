@@ -23,6 +23,11 @@ module.exports = {
         createdAt : new Date(),
         updatedAt : new Date()
        },
+       {
+         nama_mapel: "Ilmu Pengetahuan Alam",
+         createdAt : new Date(),
+         updatedAt : new Date()
+       }
      ])
   },
 

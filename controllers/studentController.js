@@ -2,6 +2,7 @@
 
 const {Student,Class,Mapel} = require("../models");
 
+
 const studentController = {
     getAll: async (req,res,next) =>{
         try {
