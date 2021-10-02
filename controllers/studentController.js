@@ -1,6 +1,6 @@
 "use strict"
 
-const {Student,Class,Mapel} = require("../models");
+const {Student,Class,Mapel,Score} = require("../models");
 
 
 const studentController = {
