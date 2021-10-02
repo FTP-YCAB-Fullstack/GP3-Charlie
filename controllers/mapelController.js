@@ -5,19 +5,25 @@ const {Mapel,Score,Student} = require("../models");
 const mapelController= {
     getMapel: async(req,res,next)=>{
         try {
-            const currentUser = req.currentUser
-            console.log(currentUser.role)
+            const currentUser = req.currentUser;
             if(currentUser.role === "admin"){
-                let mapel = await Mapel.findAll({include:[Score]});
-                res.status(200).json({
-                    message: 'Success',
-                    mapel,
-                    currentUser
-                })
+                let mapel = await Mapel.findAll();
+                if(mapel.length){
+
+                    res.status(200).json({
+                        message: 'Success',
+                        mapel,
+                        currentUser
+                    })
+                }else{
+                    res.status(404).json({
+                        msg : "Data is Empty"
+                    })
+                }
             }
 
             if(currentUser.role === "teacher"){
-                let mapel = await Mapel.findAll({include:[Score]});
+                let mapel = await Mapel.findAll();
                 res.status(200).json({
                     message: 'Success',
                     mapel,
@@ -25,10 +31,7 @@ const mapelController= {
                 })
             }
         } catch (error) {
-            res.status(500).json({
-                message:"unatuhorization",
-                error
-            })
+            next({code:500,message:error.message})
         }
     },
     getDetail: async(req,res,next)=>{
@@ -56,9 +59,11 @@ const mapelController= {
         try {
             const currentUser = req.currentUser
             console.log(currentUser.role)
+            
+            let {nama_mapel} = req.body;
+
             if(currentUser.role === "admin"){
 
-                let {nama_mapel} = req.body;
         
                 let data = await Mapel.create({nama_mapel});
                 
@@ -129,7 +134,8 @@ const mapelController= {
                 await data.destroy();
         
                 res.sendStatus(204)
-            }else{
+            }
+            else{
                 res.status(401).json({
                     message: "Access Denied"
                 })
