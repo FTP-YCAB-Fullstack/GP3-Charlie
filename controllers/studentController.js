@@ -8,7 +8,7 @@ const studentController = {
         try {
             const currentUser = req.currentUser;
             if (currentUser.role === "admin"){
-                let student = await Student.findAll({include : [Class,Mapel]});
+                let student = await Student.findAll({include : [Class,Mapel,Score]});
                 if (student.length){
                     res.status(200).json({
                         msg: "Success Get All Data of Student",
@@ -25,7 +25,7 @@ const studentController = {
                 // console.log(currentUser.dataValues)
                 let student = await Student.findAll({where : {
                     ClassId : currentUser.dataValues.Class.dataValues.id
-                },include : [Class,Mapel]});
+                },include : [Class,Mapel,Score]});
                 if (student.length){
                     res.status(200).json({
                         msg: "Success Get All Data of Student",

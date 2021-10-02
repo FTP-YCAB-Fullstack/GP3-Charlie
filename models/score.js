@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       Score.hasMany(models.Mapel, {
         foreignKey: 'id'
       })
-      this.belongsToMany(models.Student,{through:"Scores"})
+      this.belongsToMany(models.Student,{through:"Scores",foreignKey:"id"})
     }
   };
   Score.init({

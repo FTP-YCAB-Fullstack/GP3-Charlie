@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Class,{foreignKey:"ClassId"})
-      this.belongsToMany(models.Mapel,{through:"Scores"})
+      this.belongsToMany(models.Mapel,{through:"Scores",foreignKey:"id"})
+      // this.belongsToMany(models.Score,{through:"Scores"})
       this.belongsTo(models.Score,{foreignKey:"id"})
     }
   };
