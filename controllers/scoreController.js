@@ -148,7 +148,7 @@ const scoreController= {
     
             await data.destroy();
     
-            res.sendStatus(204)
+            next({code:200, message:"data berhasil dihapus"});
         } catch(err) {
             next({code: 500, message: err.message || 'Internal Server Error'})
         }
