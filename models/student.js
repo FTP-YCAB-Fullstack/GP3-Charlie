@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Class,{foreignKey:"ClassId"})
       this.belongsToMany(models.Mapel,{through:"Scores"})
+      this.hasMany(models.Score,{foreignKey:"studentId"})
     }
   };
   Student.init({

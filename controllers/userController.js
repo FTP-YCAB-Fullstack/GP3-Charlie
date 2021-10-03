@@ -7,7 +7,12 @@ let userController = {
         try {
             const currentUser = req.currentUser
             if(currentUser.role === "admin"){
-                let data = await User.findAll({include:Class})
+                let data = await User.findAll({attributes : ["id","name","email","role"],include:{
+                    model: Class,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                        },
+                    }})
                 res.status(200).json({
                     users : data,
                     currentUser : currentUser // mengetahui siapa yang sedang login dari authentication

@@ -4,9 +4,23 @@ const ClassController = {
     getAll : async (req,res,next) => {
         try {
             const currentUser = req.currentUser
-            console.log(currentUser.role)
+            // console.log(currentUser.role)
             if(currentUser.role === "admin"){
-                let data = await Class.findAll({include:[Student,User]})
+                let data = await Class.findAll({attributes : ["id","name","Teacher"],include:[
+                    {
+                        model: Student,
+                        attributes: {
+                            exclude: ['createdAt', 'updatedAt','Teacher']
+                            },
+                    },
+                    {
+                        model: User,
+                        attributes: {
+                            exclude: ['createdAt', 'updatedAt','password']
+                            },
+                    },
+
+                ]})
                 if(!data){
                     return next({code:404,message:"Tidak ada kelas"})
                 }

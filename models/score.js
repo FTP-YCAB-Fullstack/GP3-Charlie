@@ -17,12 +17,18 @@ module.exports = (sequelize, DataTypes) => {
       // this.belongsToMany(models.Student,{through:"studentId"})
       // this.belongsToMany(models.Student,{through : "Scores",sourceKey : "studentId"})
       // this.belongsToMany(models.Mapel,{through : "Scores",sourceKey: "MapelId"})
+
+      models.Student.belongsToMany(models.Mapel, { through : this }); // kalo mau ada data tambahan
+      models.Mapel.belongsToMany(models.Student, { through : this });
+      this.belongsTo(models.Student,{foreignKey:"studentId"})
+      // this.belongsTo(models.Mapel,{foreignKey:"MapelId"})
     }
   };
   Score.init({
     studentId: DataTypes.INTEGER,
     MapelId: DataTypes.INTEGER,
-    grade: DataTypes.STRING(2)
+    grade: DataTypes.STRING(2),
+    // StudentData : DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Score',

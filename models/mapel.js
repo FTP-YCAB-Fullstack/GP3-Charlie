@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       //   foreignKey: 'MapelId'
       // });
       this.belongsToMany(models.Student,{through:"Scores"})
+      // this.hasMany(models.Score,{foreignKey:"MapelId"})
     }
   };
   Mapel.init({

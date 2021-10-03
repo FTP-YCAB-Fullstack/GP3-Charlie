@@ -1,6 +1,6 @@
 "use strict"
 
-const {Student,Class,Mapel} = require("../models");
+const {Student,Class,Mapel,Score} = require("../models");
 
 
 const studentController = {
@@ -8,7 +8,14 @@ const studentController = {
         try {
             const currentUser = req.currentUser;
             if (currentUser.role === "admin"){
-                let student = await Student.findAll({include : [Class,Mapel]});
+                let student = await Student.findAll({attributes:["id","name"],include : [
+                    {
+                        model: Class,
+                        attributes: {
+                            exclude: ['createdAt', 'updatedAt','Teacher']
+                            },
+                    }
+                ]});
                 if (student.length){
                     res.status(200).json({
                         msg: "Success Get All Data of Student",
