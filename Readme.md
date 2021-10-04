@@ -75,7 +75,7 @@ https://1drv.ms/u/s!AvyjxC2Xxt29mgNKKwQFOMBaqZBu?e=khSRsb
    - Method : GET
 
    #
-   #### Respon Success Status Code (201)
+   #### Respon Success Status Code (200)
    Berikut adalah tampilan apabila user berhasil menampilkan semua data menggunakan Method GET.
    
     ```{
