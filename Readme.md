@@ -130,7 +130,7 @@ https://1drv.ms/u/s!AvyjxC2Xxt29mgNKKwQFOMBaqZBu?e=khSRsb
     ```
    #
    #### Respon Success
-   Ini adalah tampilan ketika anda dapat melakukan login
+   Ini adalah tampilan ketika anda dapat membuat class
    
     ```{
     {
